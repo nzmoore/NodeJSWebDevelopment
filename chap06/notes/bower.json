@@ -1,0 +1,21 @@
+{
+  "name": "notes",
+  "description": "Mobile first version of notes app",
+  "main": "",
+  "authors": [
+    "Bill Moore <bill@nzmoore.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
