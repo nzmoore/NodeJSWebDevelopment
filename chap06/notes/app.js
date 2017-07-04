@@ -33,7 +33,7 @@ app.use("/vendor/bootstrap", express.static(
 ));
 
 // vendor URL for jquery
-app.use("/vendor/bootstrap", express.static(
+app.use("/vendor/jquery", express.static(
   path.join(__dirname, "bower_components", "jquery", "dist")
 ));
 

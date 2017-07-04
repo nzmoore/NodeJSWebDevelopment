@@ -1,4 +1,4 @@
-Code examplse developed while reading:
+Code examples developed while reading:
 Node.js Web Development - Third Edition
 by David Herron
 Publisher: Packt Publishing
