@@ -4,26 +4,34 @@
     <% include headerStuff %>
   </head>
   <body>
+    <div class="row"><div class="container-fluid">
     <% include pageHeader %>
+    <div class="cols-xs-12">
     <form action="/notes/save" method="post">
-      <input type="hidden" name="docreate" value="<%=
-                    docreate ? "create" : "update"  %>">
-      <p>Key:
-        <% if (docreate) { %>
-          <input type="text" name="notekey" value="">
-        <% } else { %>
-          <%= note ? notekey : "" %>
-          <input type="hidden" name="notekey" value="<%=
-                       note ? notekey : "" %>">
-        <% } %>
-      </p>
-      <p>Title: <input type="text" name="title" value="<%=
-                    note ? note.title : "" %>">
-      </p>
-      <br><textarea name="body" rows="5" cols="40"><%=
-            note ? note.body : "" %></textarea>
-      <br><input type="submit" value="Submit">
+      <input type="hidden" name="docreate" value="<%= docreate ? "create" : "update" %>">
+    <div class="form-group">
+      <% if (docreate) { %>
+        <input class="form-control" type="text" id="notekey" name="notekey" value="" placeholder="key" >
+      <% } else { %>
+        <%= note ? notekey : "" %>
+          <input class="form-control" type="hidden" id="notekey" name="notekey" value="<%= note ? notekey : "" %>" >
+      <% } %>    
+    </div>
+
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input class="form-control" id="title" type="text" placeholder="note title" name="title"
+       value="<%= note ? note.title : "" %>" >
+    </div>
+
+    <div class="form-group">
+      <textarea class="form-control" name="body" rows="5" ><%= note ? note.body : "" %></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-default">Submit</button>
+
     </form>
     <% include footer %>
+  </div></div>
   </body>
 </html>
