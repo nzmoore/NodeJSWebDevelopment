@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "DEBUG=notes:* nodemon ./bin/www",
-    "postinstall": "bower install"
+    "postinstall": "bower install",
+    "bootstrapsetup": "cd bower_components/bootstrap && npm install && npm install grunt-cli",
+    "bootstrapbuild": "cp variables.less bower_components/bootstrap/less && cd bower_components/bootstrap && ./node_modules/.bin/grunt"
   },
   "dependencies": {
     "body-parser": "~1.17.1",

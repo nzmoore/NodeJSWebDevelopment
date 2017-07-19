@@ -27,9 +27,15 @@ app.use("/", index);
 // app.use("/users", users);
 app.use("/notes", notes);
 
-// vendor URL for bootstrap
-app.use("/vendor/bootstrap", express.static(
-  path.join(__dirname, "bower_components", "bootstrap", "dist")
+// vendor URLs for bootstrap
+app.use("/vendor/bootstrap/css", express.static(
+  path.join(__dirname, "cyborg")
+));
+app.use("/vendor/bootstrap/fonts", express.static(
+  path.join(__dirname, "bower_components", "bootstrap")
+));
+app.use("/vendor/bootstrap/js", express.static(
+  path.join(__dirname, "bower_components", "bootstrap")
 ));
 
 // vendor URL for jquery
