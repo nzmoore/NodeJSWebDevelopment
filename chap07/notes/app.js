@@ -6,6 +6,7 @@ var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var FileStreamRotator = require("file-stream-rotator");
 var fs = require("fs");
+var error = require("debug")("notes:error");
 var index = require("./routes/index");
 // var users = require("./routes/users");
 var notes = require("./routes/notes");
@@ -19,6 +20,7 @@ app.set("view engine", "ejs");
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
+// setup file logging
 var accessLogStream;
 if (process.env.REQUEST_LOG_FILE) {
   var logDirectory = path.dirname(process.env.REQUEST_LOG_FILE);
@@ -29,6 +31,11 @@ if (process.env.REQUEST_LOG_FILE) {
     verbose: false
   });
 }
+
+// handle uncaught exceptions
+process.on("uncaughtException",function (err) {
+  error("Application crashed!! - " + (err.stack || err));
+});
 
 app.use(logger(process.env.REQUEST_LOG_FORMAT || "dev",{
   stream: accessLogStream ? accessLogStream : process.stdout
@@ -58,15 +65,28 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
+// development error handler
+if (app.get("env") === "development") {
+  app.use(function(err, req, res, next) {
+    // render the error page
+    res.status(err.status || 500);
+    error((err.status || 500) + " " + error.message);
+    res.render("error", {
+      message: err.message,
+      error: err
+    });
+  });
+}
 
+// production error handler - no stacktrace
+app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  error((err.status || 500) + " " + error.message);
+  res.render("error", {
+    message: err.message,
+    error: {}
+  });
 });
 
 module.exports = app;
