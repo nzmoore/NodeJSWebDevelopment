@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "DEBUG=notes:* nodemon ./bin/www",
+    "start": "DEBUG=notes:* node ./bin/www",
+    "start-fs": "NOTES_MODEL=models/notes-fs node ./bin/www",
     "postinstall": "bower install",
     "bootstrapsetup": "cd bower_components/bootstrap && npm install && npm install grunt-cli",
     "bootstrapbuild": "cp variables.less bower_components/bootstrap/less && cd bower_components/bootstrap && ./node_modules/.bin/grunt"
@@ -16,6 +17,7 @@
     "ejs-lint": "^0.3.0",
     "express": "~4.15.2",
     "file-stream-rotator": "^0.1.0",
+    "fs-extra": "^4.0.1",
     "morgan": "~1.8.1",
     "serve-favicon": "~2.4.2"
   },
